@@ -51,7 +51,11 @@ public class BookService {
 
     @Transactional
     public void deleteBook(Long bookId) {
-        bookRepository.deleteById(bookId);
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new IllegalArgumentException("요청하신 책 정보를 찾을 수 없습니다."));
+
+        bookRepository.delete(book);
+
     }
 
     @Transactional(readOnly = true)

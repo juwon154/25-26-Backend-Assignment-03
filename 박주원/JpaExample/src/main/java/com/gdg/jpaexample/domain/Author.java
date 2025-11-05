@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Author {
 
     @Id
@@ -37,12 +37,8 @@ public class Author {
     }
 
     public void addBook(Book book) {
-        books.add(book);
-        book.setAuthor(this);
-    }
-
-    public void removeBook(Book book) {
-        books.remove(book);
-        book.setAuthor(null);
+        if (!books.contains(book)) {
+            books.add(book);
+        }
     }
 }

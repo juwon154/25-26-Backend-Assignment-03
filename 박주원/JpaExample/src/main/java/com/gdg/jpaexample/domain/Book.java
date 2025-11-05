@@ -22,7 +22,7 @@ public class Book {
 
     public static Book create(String title, Author author) {
         Book book = new Book(title, author);
-        author.addBook(book); // 연관관계 자동 설정
+        book.setAuthor(author);
         return book;
     }
 
@@ -37,6 +37,15 @@ public class Book {
     }
 
     public void setAuthor(Author author) {
+        if (this.author != null) {
+            this.author.getBooks().remove(this);
+        }
+
         this.author = author;
+
+        if (author != null && !author.getBooks().contains(this)) {
+            author.addBook(this);
+        }
+
     }
 }
