@@ -36,7 +36,7 @@ public class Book {
         setAuthor(author);
     }
 
-    public void setAuthor(Author author) {
+    private void setAuthor(Author author) {
         if (this.author != null) {
             this.author.getBooks().remove(this);
         }
